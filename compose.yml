@@ -1,0 +1,37 @@
+services:
+  app:
+    build:
+      context: .
+      target: deps
+    command: yarn dev
+    volumes:
+      - .:/app
+    ports:
+      - 3000:3000
+      - 5555:5555
+    environment:
+      DATABASE_URL: postgresql://docker:password@db:5432/app?schema=public
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: docker
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: app
+      TZ: "Asia/Tokyo"
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres-data:
