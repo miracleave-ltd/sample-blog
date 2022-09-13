@@ -2,10 +2,10 @@ import React from "react"
 import { Layout } from "@/components/Layout"
 import { Post, PostProps } from "@/components/Post"
 import prisma from '@/lib/prisma'
-import { GetStaticProps } from "next"
+import { GetServerSideProps, NextPage } from "next"
 import { Stack, Typography } from "@mui/material"
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const feed = await prisma.post.findMany({
     where: { published: true },
     include: {
@@ -16,7 +16,6 @@ export const getStaticProps: GetStaticProps = async () => {
   })
   return {
     props: { feed },
-    revalidate: 10,
   }
 }
 
@@ -24,7 +23,7 @@ type Props = {
   feed: PostProps[]
 }
 
-const Blog: React.FC<Props> = (props) => {
+const Blog: NextPage<Props> = (props) => {
   return (
     <Layout>
       {props.feed.length == 0 &&
