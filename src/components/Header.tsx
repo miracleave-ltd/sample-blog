@@ -5,9 +5,10 @@ import { AppBar, Button, IconButton, Menu, MenuItem, Toolbar, Typography, useThe
 import { AccountCircle } from '@mui/icons-material'
 
 const Header: React.FC = () => {
+  process.env.NEXTAUTH_URL
   const router = useRouter()
   const isActive: (pathname: string) => boolean = (pathname) => router.pathname === pathname
-  const { data: session, status } = useSession()
+  // const { data: session, status } = useSession()
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -39,24 +40,24 @@ const Header: React.FC = () => {
           >
             ブログリスト
           </Button>
-          { status === 'loading' && (
+          {/* { status === 'loading' && (
             <Typography>読み込み中...</Typography>
           )}
           { status != 'loading' && !session && (
             <Button href="#" variant="outlined" sx={{ my: 1, mx: 1.5 }} onClick={() => signIn('google')}>
               ログイン
             </Button>
-          )}
-          { session && (
+          )} */}
+          {/* { session && ( */}
             <>
-              <Button
+              {/* <Button
                 color="primary"
                 href="/drafts"
                 disabled={isActive('/drafts')}
                 sx={{ mr: 2 }}
               >
                 下書きリスト
-              </Button>
+              </Button> */}
               <Button
                 variant="outlined"
                 color="primary"
@@ -66,7 +67,7 @@ const Header: React.FC = () => {
               >
                 記事作成
               </Button>
-              <IconButton
+              {/* <IconButton
                 size="large"
                 aria-label="account of current user"
                 aria-controls="menu-appbar"
@@ -75,8 +76,8 @@ const Header: React.FC = () => {
                 color="inherit"
               >
                 <AccountCircle />
-              </IconButton>
-              <Menu
+              </IconButton> */}
+              {/* <Menu
                 id="menu-appbar"
                 anchorEl={anchorEl}
                 keepMounted
@@ -84,9 +85,9 @@ const Header: React.FC = () => {
                 onClose={handleClose}
               >
                 <MenuItem onClick={() => signOut()}>ログアウト</MenuItem>
-              </Menu>
+              </Menu> */}
             </>
-          )}
+          {/* )} */}
         </Toolbar>
       </AppBar>
     </>

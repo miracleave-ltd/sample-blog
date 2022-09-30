@@ -28,7 +28,7 @@ const Post:NextPage<{ post: PostProps }> = ({ post }) => {
           <ReactMarkdown>{post.content!}</ReactMarkdown>
           <Typography variant="overline" display="block" gutterBottom>
             作成者：{authorName}
-        </Typography>
+          </Typography>
         </CardContent>
       </CardActionArea>
     </Card>

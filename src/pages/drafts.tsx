@@ -7,15 +7,15 @@ import { getSession, useSession } from 'next-auth/react'
 import { Stack, Typography } from '@mui/material'
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-  const session = await getSession({ req })
-  if (!session) {
-    res.statusCode = 403
-    return { props: { drafts: [] } }
-  }
+  // const session = await getSession({ req })
+  // if (!session) {
+  //   res.statusCode = 403
+  //   return { props: { drafts: [] } }
+  // }
 
   const drafts = await prisma.post.findMany({
     where: {
-      author: { email: session.user?.email },
+      // author: { email: session.user?.email },
       published: false,
     },
     include: {
@@ -34,16 +34,16 @@ type Props = {
 }
 
 const Drafts: NextPage<Props> = (props) => {
-  const { data: session } = useSession()
+  // const { data: session } = useSession()
 
-  if (!session) {
-    return (
-      <Layout>
-        <Typography variant="h4" sx={{ mb: 2 }}>下書きリスト</Typography>
-        <Typography>このページを閲覧するには、ログインする必要があります。</Typography>
-      </Layout>
-    )
-  }
+  // if (!session) {
+  //   return (
+  //     <Layout>
+  //       <Typography variant="h4" sx={{ mb: 2 }}>下書きリスト</Typography>
+  //       <Typography>このページを閲覧するには、ログインする必要があります。</Typography>
+  //     </Layout>
+  //   )
+  // }
   
   return (
     <Layout>

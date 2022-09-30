@@ -33,5 +33,15 @@ services:
       timeout: 5s
       retries: 5
 
+  deps:
+    build:
+      context: .
+      # target: deps
+    command: yarn dev
+    environment:
+      DATABASE_URL: postgresql://docker:password@db:5432/app?schema=public
+    depends_on:
+      db:
+        condition: service_healthy
 volumes:
   postgres-data:

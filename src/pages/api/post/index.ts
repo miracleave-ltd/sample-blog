@@ -13,7 +13,8 @@ const createPost = async (req: NextApiRequest, res: NextApiResponse) => {
     data: {
       title: title,
       content: content,
-      author: { connect: { email: session?.user?.email ?? undefined } },
+      // author: { connect: { email: session?.user?.email ?? undefined } },
+      published: true,
     },
   })
   res.json(result)
