@@ -7,17 +7,12 @@ import { NextPage } from "next"
 export type PostProps = {
   id: string
   title: string
-  author: {
-    name: string | null
-    email: string | null
-  } | null
   content: string | null
   published: boolean
 }
 
 const Post:NextPage<{ post: PostProps }> = ({ post }) => {
   const router = useRouter()
-  const authorName = post.author ? post.author.name : "作成者不明"
   return (
     <Card variant="outlined">
       <CardActionArea onClick={() => router.push(`/p/${post.id}`)} >
@@ -26,9 +21,6 @@ const Post:NextPage<{ post: PostProps }> = ({ post }) => {
             {post.title}
           </Typography>
           <ReactMarkdown>{post.content!}</ReactMarkdown>
-          <Typography variant="overline" display="block" gutterBottom>
-            作成者：{authorName}
-          </Typography>
         </CardContent>
       </CardActionArea>
     </Card>

@@ -14,18 +14,7 @@
 
 ## 利用する環境変数
 
-- NEXTAUTH_URL: 認証用APIエンドポイント
-- SECRET: 認証用暗号化シークレット
-- GOOGLE_CLIENT_ID: Google認証クライアントID
-- GOOGLE_CLIENT_SECRET: Google認証クライアントシークレット
 - DATABASE_URL: PostgreSQL接続文字列
-
-## SECRET生成
-
-環境変数に設定する認証用暗号化シークレットの生成方法は次のコマンドを実行してください。
-```sh
- openssl rand -base64 32
- ```
 
 ## 注意事項
 

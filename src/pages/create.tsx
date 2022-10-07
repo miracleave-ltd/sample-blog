@@ -23,7 +23,6 @@ const Draft: NextPage = () => {
           content: data.content,
         }),
       })
-      // await router.push('/drafts')
       await router.push('/')
     } catch (error) {
       console.error(error)

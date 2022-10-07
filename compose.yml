@@ -36,7 +36,6 @@ services:
   deps:
     build:
       context: .
-      # target: deps
     command: yarn dev
     environment:
       DATABASE_URL: postgresql://docker:password@db:5432/app?schema=public
