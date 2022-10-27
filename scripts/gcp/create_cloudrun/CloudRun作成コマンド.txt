@@ -1,0 +1,44 @@
+Cloud Run作成手順コマンド
+
+■前提
+「$～」と記載ある文字列は変数のため、ご自身の環境に合わせたものに置き換えてください。
+
+■実行コマンド
+
+①リポジトリの認証するコマンド
+gcloud auth configure-docker asia-northeast1-docker.pkg.dev
+※リポジトリのゾーンをasia-northeast1以外にした方は、自分が作成したゾーンに修正してください
+
+②Cloud ShellからCloud SQLに接続するコマンド
+gcloud sql connect $インスタンス名 --user=postgres --database=$データベース名
+例)gcloud sql connect sts-handson-cloudsql --user=postgres --database=simple-blog
+
+③データベースのテーブル一覧を表示するコマンド
+\dt;
+
+④GitHubからプログラムをCloneするコマンド
+git clone https://github.com/miracleave-ltd/simple-blog.git
+
+⑤.envファイルを作成するコマンド
+echo "DATABASE_URL=postgresql://posgres:{password}@{IPアドレス}:5432/{database}?schema=public" >>simple-blog/.env
+例)echo "DATABASE_URL=postgresql://posgres:StsPassword123@8.8.8.8:5432/simple-blog?schema=public" >>simple-blog/.env
+
+⑥Dockerイメージをビルドするコマンド
+docker build -t asia-northeast1-docker.pkg.dev/$プロジェクトID/$リポジトリ名/simple-blog simple-blog/
+※リポジトリの作成場所をasia-northeast1以外にした方は、自分が作成したゾーンに修正してください
+例)docker build -t asia-northeast1-docker.pkg.dev/sts-handson/sts-handson-repository/simple-blog simple-blog/
+
+⑦データベースからExitするコマンド
+\q
+
+⑧DockerイメージをリポジトリにPushするコマンド
+docker push asia-northeast1-docker.pkg.dev/$プロジェクトID/$リポジトリ名/simple-blog:latest
+例)docker push asia-northeast1-docker.pkg.dev/sts-handson/sts-handson-repository/test:latest
+
+■環境変数
+名前1:DATABASE_URL
+値：posgresql://postgres:$パスワード@localhost:5432/$データベース名?schema=public&host=/cloudsql/$プロジェクトID:asia-northeast1:$インスタンス名
+例)postgresql://postgres:StsPassword123@localhost:5432/simple-blog?schema=public&host=/cloudsql/sts-handson:asia-northeast1:sts-handson-cloudsql
+※Cloud SQLのゾーンをasia-northeast1以外にした方は、自分が作成したゾーンに修正してください
+
+
