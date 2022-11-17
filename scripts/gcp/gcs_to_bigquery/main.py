@@ -1,6 +1,7 @@
 import os
 from google.cloud import bigquery
 
+
 def handler(event, context):
     table_id = os.environ['TABLE_ID']
     bucket = event['bucket']
