@@ -1,0 +1,1 @@
+DATABASE_URL: postgresql://postgres:password@{db_connection}:5432/simple-blog?schema=public

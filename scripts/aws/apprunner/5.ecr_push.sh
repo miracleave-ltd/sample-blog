@@ -1,0 +1,1 @@
+docker push {aws_account_id}.dkr.ecr.{region}.amazonaws.com/simple-blog:latest

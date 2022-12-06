@@ -1,0 +1,1 @@
+docker run --rm -it -v /home/ec2-user/environment/simple-blog/.aws:/root/.aws amazon/aws-cli configure

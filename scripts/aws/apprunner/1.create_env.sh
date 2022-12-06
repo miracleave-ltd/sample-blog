@@ -1,0 +1,1 @@
+echo "DATABASE_URL=postgresql://{account}:{password}@{db_connection}:{db_port}/{table_name}?schema={schema_name}" >> .env
