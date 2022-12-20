@@ -73,7 +73,7 @@ def lambda_handler(event, context):
 def s3Export(data):
     s3 = boto3.resource('s3')
     bucket = os.getenv('S3_BUCKET', '')
-    key = 'export/'+os.getenv('DB_TABLE', '')+'_'+datetime.now().strftime("%Y%m%d%H%M")+'.csv'
+    key = 'export/'+os.getenv('DB_TABLE', '')+'.csv'
     df = pd.DataFrame(data)
     obj = s3.Object(bucket,key)
     obj.put(Body=df.to_csv(None, header=False, index=False).encode("utf-8"))
