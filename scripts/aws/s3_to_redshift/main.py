@@ -9,7 +9,7 @@ DB_USER='awsuser'
 
 # 実行するSQLを設定
 sql = '''
-    copy {テーブル名} from 's3://{バケット名}/export/*.csv' credentials 'aws_iam_role=arn:aws:iam::{AWSアカウントID}:role/redshift-role' csv;
+    copy {テーブル名} from 's3://{バケット名}/export/analytics.csv' credentials 'aws_iam_role=arn:aws:iam::{AWSアカウントID}:role/{ロール}' csv;
 '''
 
 def lambda_handler(event, context):
